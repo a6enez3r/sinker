@@ -4,17 +4,30 @@ import (
 	"fmt"
 	"os"
 	"io/ioutil"
+	"strings"
 	// "path"
 	"github.com/tidwall/gjson"
 	"github.com/akamensky/argparse"
 )
+
+func helper(multi []string, byteValue []byte) {
+	fmt.Println(multi)
+	for _, single := range multi {
+		results := gjson.GetBytes(byteValue, single).Array()
+
+		for k, v := range results {
+			fmt.Println(k, v)
+			// fmt.Println(v.Map()["filename"])
+		}
+	}
+}
 
 
 func main() {
 	parser := argparse.NewParser("sinker", "sync files between local directories")
 
 	config := parser.String("c", "config", &argparse.Options{Required: true, Help: "sync JSON configuration", Default: "./sinker.json"})
-	filter := parser.String("f", "filter", &argparse.Options{Required: false, Help: "filter to specify which items to sync", Default: "tools.#(name=='diagrams')"})
+	filter := parser.String("f", "filter", &argparse.Options{Required: false, Help: "filter to specify which items to sync", Default: "all"})
 
 	err := parser.Parse(os.Args)
 	if err != nil {
@@ -29,11 +42,19 @@ func main() {
 
 	byteValue, _ := ioutil.ReadAll(jsonFile)
 
-	results := gjson.GetBytes(byteValue, *filter).Array()
-	for k, v := range results {
-        fmt.Println(k, v)
-    }
-
-	fmt.Println(*config)
-	fmt.Println(*filter)	
+	if *filter == "all" || strings.Contains(*filter, "|") {
+		if *filter == "all" {
+			var multi []string
+			for _, item := range gjson.GetBytes(byteValue, *filter).Array() {
+				multi = append(multi, item.String())
+			}
+			helper(multi, byteValue)
+		} else {
+			multi := strings.Split(*filter, "|")
+			helper(multi, byteValue)
+		}
+	} else {
+		multi := []string{*filter}
+		helper(multi, byteValue)
+	}
 }
