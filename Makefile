@@ -122,8 +122,14 @@ deps:
 	# deps
 	go mod download
 	
+
+## single platform build
+build-single:
+	GOOS=darwin GOARCH=amd64 go build -o sinker
+	chmod +x sinker
+
 ## cross platform build
-build:
+build-all:
 	rm -rf builds && mkdir builds && chmod +x ./scripts/go-build-all && ./scripts/go-build-all && mv ${pn}-* builds
 
 ## run package
