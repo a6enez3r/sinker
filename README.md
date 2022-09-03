@@ -1,6 +1,7 @@
-# sync
-
-sync local files
+# sinker
+[![build](https://github.com/a6enez3r/sinker/actions/workflows/build.yml/badge.svg)](https://github.com/a6enez3r/sinker/actions/workflows/build.yml)
+----
+sync multiple local files with a single configuration file
 
 ## quickstart
 
