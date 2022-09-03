@@ -1,4 +1,4 @@
-pn := sync
+pn := sinker
 
 ifeq ($(version),)
 version := 0.0.1
