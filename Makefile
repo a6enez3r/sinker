@@ -13,7 +13,7 @@ ifeq ($(${denv}),)
 denv := development
 endif
 ifeq ($(cname),)
-cname := sync_${denv}
+cname := sinker_${denv}
 endif
 ifeq ($(ctag),)
 ctag := latest
@@ -134,7 +134,7 @@ build-all:
 
 ## run package
 run:
-	go run main.go cli.go
+	go run main.go
 
 ## test package
 test:
@@ -142,7 +142,7 @@ test:
 
 ## benchmark package
 benchmark:
-	go test -bench=. ./blackjack/
+	go test -bench=. main.go
 
 ## test coverage
 coverage:
@@ -150,13 +150,13 @@ coverage:
 
 ## vet modules
 vet:
-	go vet .
+	go vet main.go
 
 ## -- code quality --
 
 ## lint package
 lint:
-	golint .
+	golint main.go
 
 ## format package
 format:
