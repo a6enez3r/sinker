@@ -125,8 +125,7 @@ deps:
 
 ## single platform build
 build-single:
-	GOOS=darwin GOARCH=amd64 go build -o sinker
-	chmod +x sinker
+	go build -o sinker .
 
 ## cross platform build
 build-all:
