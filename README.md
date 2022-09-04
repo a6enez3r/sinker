@@ -8,13 +8,13 @@ sync multiple local files with a single configuration file
 download the binary [for your platform] using curl
 
 ```sh
-    curl -L  https://github.com/a6enez3r/sinker/raw/main/builds/sinker-darwin-amd64 >> sinker && chmod +x ./sinker
+curl -L  https://github.com/a6enez3r/sinker/raw/main/builds/sinker-darwin-amd64 >> sinker && chmod +x ./sinker
 ```
 
 and run it
 
 ```sh
-    ./sinker
+ ./sinker
 ```
 
 you can see available commands using
