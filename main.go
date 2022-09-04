@@ -43,7 +43,7 @@ func sync(multi []string, byteValue []byte, inverse bool) {
 		results := gjson.GetBytes(byteValue, single).Array()
 
 		for _, v := range results {
-			source, destination := v.Map()["destination"].String(), v.Map()["source"].String()
+			source, destination := v.Map()["source"].String(), v.Map()["destination"].String()
 			if inverse {
 				copy(destination, source)
 			} else {
