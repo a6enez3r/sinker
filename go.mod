@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/akamensky/argparse v1.4.0
-	github.com/tidwall/gjson v1.14.3
+	github.com/tidwall/gjson v1.14.4
 )
 
 require (
